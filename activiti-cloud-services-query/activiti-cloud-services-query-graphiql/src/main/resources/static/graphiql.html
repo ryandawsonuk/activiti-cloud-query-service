@@ -133,7 +133,7 @@
       var serverPathUrl = '';
 
       if ( window.location.pathname.lastIndexOf('/') > 1 ) {
-          serverPathUrl = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+          serverPathUrl = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
       }
 
       // Build websocket endpoint
