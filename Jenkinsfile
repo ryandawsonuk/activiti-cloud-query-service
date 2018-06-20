@@ -34,14 +34,9 @@ pipeline {
             sh "git config --global credential.helper store"
             sh "jx step validate --min-jx-version 1.1.73"
             sh "jx step git credentials"
-            // so we can retrieve the version in later steps
-            sh "echo \$(jx-release-version) > VERSION"
-            sh "mvn versions:set -DnewVersion=\$(cat VERSION)"
           }
           container('maven') {
             sh 'mvn clean deploy -DskipTests'
-
-            sh 'export VERSION=`cat VERSION`'
 
           }
         }
