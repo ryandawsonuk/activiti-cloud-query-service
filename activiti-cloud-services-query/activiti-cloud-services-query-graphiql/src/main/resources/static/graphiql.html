@@ -121,6 +121,12 @@
               + window.location.host
               + serverPathUrl + "/admin/graphql";
 
+          console.log(fetchURL);
+
+          if(parameters.useshortfetch == "true"){
+              fetchURL = './admin/graphql';
+          }
+
           return fetch(fetchURL, {
           method: 'post',
           headers: {
@@ -131,6 +137,7 @@
           body: JSON.stringify(graphQLParams),
           credentials: 'include',
         }).then(function (response) {
+            console.log('fetch response '+response.text);
           return response.text();
         }).then(function (responseBody) {
           try {
