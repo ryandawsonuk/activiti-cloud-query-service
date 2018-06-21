@@ -143,14 +143,15 @@
 
       var serverPathUrl = '';
 
-      if ( window.location.pathname.lastIndexOf('/') > 1 ) {
+      if ( window.location.pathname.lastIndexOf('/') > 1 && (parameters.wsingw == "false") ) {
           serverPathUrl = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
       }
 
       // Build websocket endpoint
 	  var wsURL = (window.location.protocol == "https:" ? "wss://" : "ws://") 
 	  				+ window.location.host 
-	  				+ serverPathUrl + "/ws/graphql";
+	  				+ serverPathUrl
+                    + "/ws/graphql";
 	
       //  create a SubscriptionClient with your subscriptions endpoint
       var subscriptionsClient = new window.SubscriptionsTransportWs.SubscriptionClient(wsURL, { reconnect: true });
