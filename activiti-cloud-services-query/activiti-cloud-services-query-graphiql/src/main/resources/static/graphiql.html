@@ -121,11 +121,15 @@
               + window.location.host
               + serverPathUrl + "/admin/graphql";
 
-          console.log(fetchURL);
-
           if(parameters.useshortfetch == "true"){
               fetchURL = './admin/graphql';
           }
+
+          if(parameters.fetch_url != null){
+              fetchURL = parameters.fetch_url;
+          }
+
+          console.log(fetchURL);
 
           return fetch(fetchURL, {
           method: 'post',
@@ -150,8 +154,11 @@
 
       var serverPathUrl = '';
 
-      if ( window.location.pathname.lastIndexOf('/') > 1 && (parameters.wsingw == "false") ) {
-          serverPathUrl = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+      //assume ws on gw, for some reason this seems to be proxied rather than on /
+      serverPathUrl = "/activiti-cloud-gateway";
+
+      if ( parameters.ws_path != null ) {
+          serverPathUrl = parameters.ws_path;
       }
 
       // Build websocket endpoint
