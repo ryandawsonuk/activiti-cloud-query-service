@@ -117,16 +117,16 @@
           }
 
           // Build fetch url
-          var fetchURL = window.location.protocol
-              + window.location.host
-              + serverPathUrl + "/admin/graphql";
+          var fetchURL = './admin/graphql';
 
-          if(parameters.useshortfetch == "true"){
-              fetchURL = './admin/graphql';
+          if(parameters.uselongfetch == "true"){
+              fetchURL = window.location.protocol
+                  + window.location.host
+                  + serverPathUrl + "/admin/graphql";
           }
 
-          if(parameters.fetch_url != null){
-              fetchURL = parameters.fetch_url;
+          if(parameters.fetch_prefix != null){
+              fetchURL = './'+parameters.fetch_prefix+'/admin/graphql';
           }
 
           console.log(fetchURL);
@@ -161,11 +161,21 @@
           serverPathUrl = parameters.ws_path;
       }
 
+      var wsHost = window.location.host;
+
+      if (parameters.ws_host != null){
+          wsHost = parameters.ws_host;
+      }
+
       // Build websocket endpoint
 	  var wsURL = (window.location.protocol == "https:" ? "wss://" : "ws://") 
-	  				+ window.location.host 
+	  				+ wsHost
 	  				+ serverPathUrl
                     + "/ws/graphql";
+
+      if ( parameters.ws_url != null){
+          wsURL = parameters.ws_url;
+      }
 	
       //  create a SubscriptionClient with your subscriptions endpoint
       var subscriptionsClient = new window.SubscriptionsTransportWs.SubscriptionClient(wsURL, { reconnect: true });
