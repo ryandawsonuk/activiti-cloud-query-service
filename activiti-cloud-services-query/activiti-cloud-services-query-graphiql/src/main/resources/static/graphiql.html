@@ -139,6 +139,7 @@
             //'Authorization': 'Bearer ${prompt('Enter your token:', '')}',
           },
           body: JSON.stringify(graphQLParams),
+          mode: 'cors',
           credentials: 'include',
         }).then(function (response) {
             console.log('fetch response '+response.text);
